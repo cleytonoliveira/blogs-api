@@ -1,7 +1,9 @@
 const CREATED = 201;
 const SUCCESS = 200;
+const BAD_IMPLEMENTATION = 500;
 
 module.exports = {
+  BAD_IMPLEMENTATION,
   CREATED,
   SUCCESS,
 };
