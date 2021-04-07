@@ -1,10 +1,13 @@
 module.exports = (sequelize, DataTypes) => {
-  const Posts = sequelize.define('Post', {
+  const Posts = sequelize.define('BlogPost', {
     title: DataTypes.STRING,
     content: DataTypes.STRING,
     userId: DataTypes.INTEGER,
     published: DataTypes.DATE,
     updated: DataTypes.DATE,
+  },
+  {
+    timestamps: false,
   });
 
   Posts.associate = (models) => {
