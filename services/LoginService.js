@@ -1,9 +1,7 @@
 const { generateToken } = require('../utils');
 
-const loginUser = async (email, password) => {
-  const user = { email, password };
-
-  const token = generateToken(user);
+const loginUser = async (email) => {
+  const token = generateToken(email);
 
   return token;
 };

@@ -1,7 +1,11 @@
 const rescue = require('express-rescue');
 
+const {
+  CREATED,
+  SUCCESS,
+  NO_CONTENT } = require('../dictionary');
+
 const { UserService } = require('../services');
-const { CREATED, SUCCESS } = require('../dictionary');
 
 const createUser = rescue(async (req, res) => {
   const { displayName, email, password, image } = req.body;
@@ -30,8 +34,19 @@ const getUserById = rescue(async (req, res) => {
     .json(user);
 });
 
+const removeUser = rescue(async (req, res) => {
+  const { authorization } = req.headers;
+
+  const userRemoved = await UserService.removeUser(authorization);
+
+  return res
+    .status(NO_CONTENT)
+    .json(userRemoved);
+});
+
 module.exports = {
   getUserById,
+  removeUser,
   getAllUser,
   createUser,
 };

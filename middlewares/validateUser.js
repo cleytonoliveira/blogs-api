@@ -1,8 +1,9 @@
-const Boom = require('@hapi/boom');
 const { Op } = require('sequelize');
+const Boom = require('@hapi/boom');
+
 const { User } = require('../models');
 
-module.exports = async (req, res, next) => {
+module.exports = async (req, _res, next) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({

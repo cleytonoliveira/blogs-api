@@ -4,9 +4,9 @@ const { LoginService } = require('../services');
 const { SUCCESS } = require('../dictionary');
 
 const loginUser = rescue(async (req, res) => {
-  const { email, password } = req.body;
+  const { email } = req.body;
 
-  const token = await LoginService.loginUser(email, password);
+  const token = await LoginService.loginUser(email);
 
   return res
     .status(SUCCESS)

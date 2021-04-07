@@ -1,11 +1,11 @@
 const { User } = require('../models');
 
-const { generateToken } = require('../utils');
+const { generateToken, validateToken } = require('../utils');
 
 const createUser = async (displayName, email, password, image) => {
-  const user = await User.create({ displayName, email, password, image });
+  await User.create({ displayName, email, password, image });
 
-  const token = generateToken(user);
+  const token = generateToken(email);
 
   return token;
 };
@@ -22,8 +22,19 @@ const getUserById = async (id) => {
   return user;
 };
 
+const removeUser = async (authorization) => {
+  const email = await validateToken(authorization);
+
+  const userRemoved = await User.destroy({
+    where: { email },
+  });
+
+  return userRemoved;
+};
+
 module.exports = {
   getUserById,
+  removeUser,
   getAllUser,
   createUser,
 };
