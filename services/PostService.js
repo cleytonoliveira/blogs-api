@@ -1,4 +1,4 @@
-const { BlogPost } = require('../models');
+const { BlogPost, User } = require('../models');
 const { validateToken, searchUserId } = require('../utils');
 
 const createPost = async (title, content, authorization) => {
@@ -11,6 +11,15 @@ const createPost = async (title, content, authorization) => {
   return post;
 };
 
+const getAllPost = async () => {
+  const posts = await BlogPost.findAll({ include: {
+    model: User, as: 'user',
+  } });
+
+  return posts;
+};
+
 module.exports = {
   createPost,
+  getAllPost,
 };
