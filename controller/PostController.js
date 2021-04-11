@@ -32,8 +32,20 @@ const getPostById = rescue(async (req, res) => {
     .json(post);
 });
 
+const updatePost = rescue(async (req, res) => {
+  const { title, content } = req.body;
+  const { id } = req.params;
+
+  const post = await PostService.updatePost(title, content, id);
+
+  return res
+    .status(SUCCESS)
+    .json(post);
+});
+
 module.exports = {
   getPostById,
+  updatePost,
   createPost,
   getAllPost,
 };
