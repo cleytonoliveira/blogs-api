@@ -14,7 +14,7 @@ const createPost = rescue(async (req, res) => {
     .json(post);
 });
 
-const getAllPost = rescue(async (req, res) => {
+const getAllPost = rescue(async (_req, res) => {
   const posts = await PostService.getAllPost();
 
   return res
@@ -22,7 +22,18 @@ const getAllPost = rescue(async (req, res) => {
     .json(posts);
 });
 
+const getPostById = rescue(async (req, res) => {
+  const { id } = req.params;
+
+  const post = await PostService.getPostById(id);
+
+  return res
+    .status(SUCCESS)
+    .json(post);
+});
+
 module.exports = {
+  getPostById,
   createPost,
   getAllPost,
 };
