@@ -1,6 +1,6 @@
 const { Op } = require('sequelize');
 
-const { BlogPost, User } = require('../models');
+const { BlogPost, User } = require('../database/models');
 const { validateToken, searchUserId } = require('../utils');
 
 const createPost = async (title, content, authorization) => {
