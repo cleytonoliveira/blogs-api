@@ -12,4 +12,6 @@ post.get('/:id', PostController.getPostById);
 
 post.put('/:id', PostController.updatePost);
 
+post.delete('/:id', PostController.removePost);
+
 module.exports = post;

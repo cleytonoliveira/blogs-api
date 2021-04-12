@@ -65,10 +65,19 @@ const searchPost = async (searchTerm) => {
   return search;
 };
 
+const removePost = async (id) => {
+  const postRemoved = await BlogPost.destroy({
+    where: { id },
+  });
+
+  return postRemoved;
+};
+
 module.exports = {
   getPostById,
   updatePost,
   createPost,
   getAllPost,
   searchPost,
+  removePost,
 };

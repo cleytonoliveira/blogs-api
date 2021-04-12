@@ -1,7 +1,7 @@
 const rescue = require('express-rescue');
 
 const { PostService } = require('../services');
-const { CREATED, SUCCESS } = require('../dictionary');
+const { CREATED, SUCCESS, NO_CONTENT } = require('../dictionary');
 
 const createPost = rescue(async (req, res) => {
   const { title, content } = req.body;
@@ -53,10 +53,21 @@ const searchPost = rescue(async (req, res) => {
     .json(search);
 });
 
+const removePost = rescue(async (req, res) => {
+  const { id } = req.params;
+
+  const postRemoved = await PostService.removePost(id);
+
+  return res
+    .status(NO_CONTENT)
+    .json(postRemoved);
+});
+
 module.exports = {
   getPostById,
   updatePost,
   createPost,
   getAllPost,
   searchPost,
+  removePost,
 };
