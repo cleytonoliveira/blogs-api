@@ -1,3 +1,5 @@
+const { Op } = require('sequelize');
+
 const { BlogPost, User } = require('../models');
 const { validateToken, searchUserId } = require('../utils');
 
@@ -21,7 +23,7 @@ const getAllPost = async () => {
 
 const getPostById = async (id) => {
   const post = await BlogPost.findByPk(id, { include: {
-    model: User, as: 'user',
+    model: User, as: 'user', attributes: { exclude: ['password'] },
   } });
 
   return post;
@@ -43,9 +45,30 @@ const updatePost = async (title, content, id) => {
   };
 };
 
+const searchPost = async (searchTerm) => {
+  const search = await BlogPost.findAll({
+    where: {
+      [Op.or]: [
+        { title: {
+          [Op.substring]: `%${searchTerm}%` },
+        },
+        { content: {
+          [Op.substring]: `%${searchTerm}%` },
+        },
+      ],
+    },
+    include: {
+      model: User, as: 'user', attributes: { exclude: ['password'] },
+    },
+  });
+
+  return search;
+};
+
 module.exports = {
   getPostById,
   updatePost,
   createPost,
   getAllPost,
+  searchPost,
 };

@@ -43,9 +43,20 @@ const updatePost = rescue(async (req, res) => {
     .json(post);
 });
 
+const searchPost = rescue(async (req, res) => {
+  const { q: searchTerm } = req.query;
+
+  const search = await PostService.searchPost(searchTerm);
+
+  return res
+    .status(SUCCESS)
+    .json(search);
+});
+
 module.exports = {
   getPostById,
   updatePost,
   createPost,
   getAllPost,
+  searchPost,
 };
