@@ -1,11 +1,9 @@
 const { Op } = require('sequelize');
 
 const { BlogPost, User } = require('../database/models');
-const { validateToken, searchUserId } = require('../utils');
+const { searchUserId } = require('../utils');
 
-const createPost = async (title, content, authorization) => {
-  const email = await validateToken(authorization);
-
+const createPost = async (title, content, email) => {
   const userId = await searchUserId(email);
 
   const post = await BlogPost.create({ title, content, userId });

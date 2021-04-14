@@ -1,13 +1,15 @@
 const userRegisterValidate = require('./userRegisterValidate');
-const validateLoginFields = require('./validateLoginFields');
 const validateUserDatabase = require('./validateUserDatabase');
+const validateLoginFields = require('./validateLoginFields');
+const validatePostFields = require('./validatePostFields');
 const error = require('./error');
 const auth = require('./auth');
 
 module.exports = {
   userRegisterValidate,
-  validateLoginFields,
   validateUserDatabase,
+  validateLoginFields,
+  validatePostFields,
   error,
   auth,
 };

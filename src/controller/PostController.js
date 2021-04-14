@@ -5,9 +5,9 @@ const { CREATED, SUCCESS, NO_CONTENT } = require('../utils/dictionary');
 
 const createPost = rescue(async (req, res) => {
   const { title, content } = req.body;
-  const { authorization } = req.headers;
+  const { email } = req;
 
-  const post = await PostService.createPost(title, content, authorization);
+  const post = await PostService.createPost(title, content, email);
 
   return res
     .status(CREATED)
