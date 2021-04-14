@@ -31,7 +31,7 @@ const getPostById = async (id) => {
 
 const updatePost = async (title, content, id) => {
   const { userId } = await BlogPost.update(
-    { title, content },
+    { title, content, updated: new Date() },
     {
       where: { id },
     },
