@@ -1,4 +1,5 @@
 const rescue = require('express-rescue');
+const Boom = require('@hapi/boom');
 
 const {
   CREATED,
@@ -25,10 +26,13 @@ const getAllUser = rescue(async (_req, res) => {
     .json(users);
 });
 
-const getUserById = rescue(async (req, res) => {
+const getUserById = rescue(async (req, res, next) => {
   const { id } = req.params;
 
   const user = await UserService.getUserById(id);
+
+  if (user.error) next(Boom.notFound(user.message));
+
   return res
     .status(SUCCESS)
     .json(user);

@@ -8,7 +8,9 @@ const user = Router();
 user.get('/',
   auth,
   UserController.getAllUser);
-user.get('/:id', UserController.getUserById);
+user.get('/:id',
+  auth,
+  UserController.getUserById);
 
 user.post('/',
   userRegisterValidate,

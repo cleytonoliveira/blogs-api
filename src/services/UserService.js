@@ -19,6 +19,13 @@ const getAllUser = async () => {
 const getUserById = async (id) => {
   const user = await User.findByPk(id);
 
+  if (!user) {
+    return {
+      error: true,
+      message: 'Usuário não existe',
+    };
+  }
+
   return user;
 };
 
