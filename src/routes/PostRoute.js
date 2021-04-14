@@ -18,7 +18,10 @@ post.get('/:id',
   auth,
   PostController.getPostById);
 
-post.put('/:id', PostController.updatePost);
+post.put('/:id',
+  auth,
+  validatePostFields,
+  PostController.updatePost);
 
 post.delete('/:id', PostController.removePost);
 
