@@ -13,7 +13,9 @@ post.post('/',
 post.get('/',
   auth,
   PostController.getAllPost);
-post.get('/search', PostController.searchPost);
+post.get('/search',
+  auth,
+  PostController.searchPost);
 post.get('/:id',
   auth,
   PostController.getPostById);
