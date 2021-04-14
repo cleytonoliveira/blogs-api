@@ -1,9 +1,9 @@
 const { validateToken } = require('../utils');
 
 module.exports = (req, _res, next) => {
-  const { authorization } = req.headers;
+  const { authorization: token } = req.headers;
 
-  validateToken(authorization, next);
+  validateToken(req, token, next);
 
   next();
 };

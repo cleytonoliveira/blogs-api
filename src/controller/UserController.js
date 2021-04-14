@@ -39,9 +39,9 @@ const getUserById = rescue(async (req, res, next) => {
 });
 
 const removeUser = rescue(async (req, res) => {
-  const { authorization } = req.headers;
+  const { email } = req;
 
-  const userRemoved = await UserService.removeUser(authorization);
+  const userRemoved = await UserService.removeUser(email);
 
   return res
     .status(NO_CONTENT)

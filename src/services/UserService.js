@@ -1,6 +1,6 @@
 const { User } = require('../database/models');
 
-const { generateToken, validateToken } = require('../utils');
+const { generateToken } = require('../utils');
 
 const createUser = async (displayName, email, password, image) => {
   await User.create({ displayName, email, password, image });
@@ -29,9 +29,7 @@ const getUserById = async (id) => {
   return user;
 };
 
-const removeUser = async (authorization) => {
-  const email = await validateToken(authorization);
-
+const removeUser = async (email) => {
   const userRemoved = await User.destroy({
     where: { email },
   });

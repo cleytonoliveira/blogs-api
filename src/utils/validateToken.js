@@ -1,7 +1,7 @@
 const Boom = require('@hapi/boom');
 const jwt = require('jsonwebtoken');
 
-module.exports = (token, next) => {
+module.exports = (req, token, next) => {
   const { TOKEN_SECRET } = process.env;
 
   const secret = TOKEN_SECRET || 'mySecretToken';
@@ -9,7 +9,8 @@ module.exports = (token, next) => {
   if (!token) next(Boom.unauthorized('Token não encontrado'));
 
   try {
-    return jwt.verify(token, secret);
+    const { data } = jwt.verify(token, secret);
+    req.email = data;
   } catch (err) {
     next(Boom.unauthorized('Token expirado ou inválido'));
   }

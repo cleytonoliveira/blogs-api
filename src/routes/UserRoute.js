@@ -16,6 +16,8 @@ user.post('/',
   userRegisterValidate,
   UserController.createUser);
 
-user.delete('/me', UserController.removeUser);
+user.delete('/me',
+  auth,
+  UserController.removeUser);
 
 module.exports = user;
