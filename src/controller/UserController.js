@@ -31,7 +31,7 @@ const getUserById = rescue(async (req, res, next) => {
 
   const user = await UserService.getUserById(id);
 
-  if (user.error) next(Boom.notFound(user.message));
+  if (user.error) return next(Boom.notFound(user.message));
 
   return res
     .status(SUCCESS)

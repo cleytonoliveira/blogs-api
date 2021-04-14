@@ -6,12 +6,13 @@ module.exports = (req, token, next) => {
 
   const secret = TOKEN_SECRET || 'mySecretToken';
 
-  if (!token) next(Boom.unauthorized('Token não encontrado'));
+  if (!token) return next(Boom.unauthorized('Token não encontrado'));
 
   try {
     const { data } = jwt.verify(token, secret);
     req.email = data;
+    return data;
   } catch (err) {
-    next(Boom.unauthorized('Token expirado ou inválido'));
+    throw next(Boom.unauthorized('Token expirado ou inválido'));
   }
 };

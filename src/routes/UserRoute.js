@@ -1,7 +1,7 @@
 const { Router } = require('express');
 
 const { UserController } = require('../controller');
-const { userRegisterValidate, auth } = require('../middlewares');
+const { userRegisterValidate, auth, validateEmailDatabase } = require('../middlewares');
 
 const user = Router();
 
@@ -14,6 +14,7 @@ user.get('/:id',
 
 user.post('/',
   userRegisterValidate,
+  validateEmailDatabase,
   UserController.createUser);
 
 user.delete('/me',

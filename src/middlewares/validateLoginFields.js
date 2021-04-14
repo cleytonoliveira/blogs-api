@@ -16,5 +16,5 @@ module.exports = (req, _res, next) => {
     email: Joi.string().email().empty().required(),
     password: Joi.string().min(6).empty().required(),
   });
-  validateRequest(req, next, schema);
+  return validateRequest(req, next, schema);
 };

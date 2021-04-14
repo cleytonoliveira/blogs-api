@@ -1,7 +1,7 @@
 const Boom = require('@hapi/boom');
 const Joi = require('@hapi/joi');
 
-const { User } = require('../database/models');
+// const { User } = require('../database/models');
 
 const validateRequest = (req, next, schema) => {
   const { error, value } = schema.validate(req.body);
@@ -13,13 +13,13 @@ const validateRequest = (req, next, schema) => {
   next();
 };
 
-const emailAlreadyExists = async (req, next) => {
-  const { email } = req.body;
+// const emailAlreadyExists = async (req, next) => {
+//   const { email } = req.body;
 
-  const isEmailRegistered = await User.findOne({ where: { email } });
+//   const isEmailRegistered = await User.findOne({ where: { email } });
 
-  if (isEmailRegistered) next(Boom.conflict('Usuário já existe'));
-};
+//   if (isEmailRegistered) next(Boom.conflict('Usuário já existe'));
+// };
 
 module.exports = (req, _res, next) => {
   const schema = Joi.object({
@@ -32,6 +32,6 @@ module.exports = (req, _res, next) => {
     }),
     image: Joi.string(),
   });
-  validateRequest(req, next, schema);
-  emailAlreadyExists(req, next);
+  return validateRequest(req, next, schema);
+  // emailAlreadyExists(req, next);
 };
