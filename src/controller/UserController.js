@@ -3,7 +3,7 @@ const rescue = require('express-rescue');
 const {
   CREATED,
   SUCCESS,
-  NO_CONTENT } = require('../dictionary');
+  NO_CONTENT } = require('../utils/dictionary');
 
 const { UserService } = require('../services');
 

@@ -1,6 +1,6 @@
 const Boom = require('@hapi/boom');
 
-const { BAD_IMPLEMENTATION } = require('../dictionary');
+const { BAD_IMPLEMENTATION } = require('../utils/dictionary');
 
 module.exports = (err, _req, res, _next) => {
   if (Boom.isBoom(err)) {

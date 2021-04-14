@@ -1,7 +1,7 @@
 const rescue = require('express-rescue');
 
 const { PostService } = require('../services');
-const { CREATED, SUCCESS, NO_CONTENT } = require('../dictionary');
+const { CREATED, SUCCESS, NO_CONTENT } = require('../utils/dictionary');
 
 const createPost = rescue(async (req, res) => {
   const { title, content } = req.body;
