@@ -16,5 +16,5 @@ module.exports = (req, _res, next) => {
     title: Joi.string().required(),
     content: Joi.string().required(),
   });
-  validateRequest(req, next, schema);
+  return validateRequest(req, next, schema);
 };

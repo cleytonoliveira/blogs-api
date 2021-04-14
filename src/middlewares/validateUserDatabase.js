@@ -16,7 +16,7 @@ module.exports = async (req, _res, next) => {
     },
   });
 
-  if (!user) next(Boom.badRequest('Campos inválidos'));
+  if (!user) return next(Boom.badRequest('Campos inválidos'));
 
   next();
 };
