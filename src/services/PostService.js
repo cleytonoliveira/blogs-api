@@ -24,6 +24,13 @@ const getPostById = async (id) => {
     model: User, as: 'user', attributes: { exclude: ['password'] },
   } });
 
+  if (!post) {
+    return {
+      error: true,
+      message: 'Post não existe',
+    };
+  }
+
   return post;
 };
 

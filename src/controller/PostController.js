@@ -1,3 +1,4 @@
+const Boom = require('@hapi/boom');
 const rescue = require('express-rescue');
 
 const { PostService } = require('../services');
@@ -26,6 +27,8 @@ const getPostById = rescue(async (req, res) => {
   const { id } = req.params;
 
   const post = await PostService.getPostById(id);
+
+  if (post.error) throw Boom.notFound(post.message);
 
   return res
     .status(SUCCESS)
