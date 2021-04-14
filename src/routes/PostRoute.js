@@ -10,7 +10,9 @@ post.post('/',
   validatePostFields,
   PostController.createPost);
 
-post.get('/', PostController.getAllPost);
+post.get('/',
+  auth,
+  PostController.getAllPost);
 post.get('/search', PostController.searchPost);
 post.get('/:id', PostController.getPostById);
 
