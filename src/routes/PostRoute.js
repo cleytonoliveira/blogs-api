@@ -25,6 +25,8 @@ post.put('/:id',
   validatePostFields,
   PostController.updatePost);
 
-post.delete('/:id', PostController.removePost);
+post.delete('/:id',
+  auth,
+  PostController.removePost);
 
 module.exports = post;

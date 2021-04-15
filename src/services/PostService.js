@@ -34,14 +34,21 @@ const getPostById = async (id) => {
   return post;
 };
 
-const updatePost = async (title, content, id) => {
-  const { userId } = await BlogPost.update(
+const updatePost = async (title, content, id, userId) => {
+  const { userId: dataId } = await BlogPost.update(
     { title, content, updated: new Date() },
     {
       where: { id },
     },
   )
     .then(() => BlogPost.findByPk(id));
+
+  if (dataId !== userId) {
+    return {
+      error: true,
+      message: 'Usuário não autorizado',
+    };
+  }
 
   return {
     title,
@@ -70,7 +77,18 @@ const searchPost = async (searchTerm) => {
   return search;
 };
 
-const removePost = async (id) => {
+const removePost = async (id, userId) => {
+  const isPostExists = await getPostById(id);
+
+  if (isPostExists.error) return isPostExists;
+
+  if (isPostExists.dataValues.id !== userId) {
+    return {
+      err: true,
+      message: 'Usuário não autorizado',
+    };
+  }
+
   const postRemoved = await BlogPost.destroy({
     where: { id },
   });

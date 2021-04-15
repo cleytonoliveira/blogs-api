@@ -10,8 +10,8 @@ module.exports = (req, token, next) => {
 
   try {
     const { data } = jwt.verify(token, secret);
-    req.email = data;
-    return data;
+    req.email = data.email;
+    req.userId = data.userId;
   } catch (err) {
     throw next(Boom.unauthorized('Token expirado ou inválido'));
   }
